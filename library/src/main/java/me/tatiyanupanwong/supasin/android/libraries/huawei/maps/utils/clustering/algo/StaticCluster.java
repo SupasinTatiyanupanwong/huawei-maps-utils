@@ -21,7 +21,7 @@ import com.huawei.hms.maps.model.LatLng;
 import me.tatiyanupanwong.supasin.android.libraries.huawei.maps.utils.clustering.Cluster;
 import me.tatiyanupanwong.supasin.android.libraries.huawei.maps.utils.clustering.ClusterItem;
 
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class StaticCluster<T extends ClusterItem> implements Cluster<T> {
     private final LatLng mCenter;
-    private final List<T> mItems = new ArrayList<T>();
+    private final Collection<T> mItems = new LinkedHashSet<>();
 
     public StaticCluster(LatLng center) {
         mCenter = center;

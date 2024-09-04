@@ -25,7 +25,7 @@ import com.huawei.hms.maps.HuaweiMap;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -95,7 +95,7 @@ abstract class MapObjectManager<O, C extends MapObjectManager.Collection> {
     protected abstract void removeObjectFromMap(O object);
 
     public class Collection {
-        private final Set<O> mObjects = new HashSet<>();
+        private final Set<O> mObjects = new LinkedHashSet<>();
 
         public Collection() {
         }

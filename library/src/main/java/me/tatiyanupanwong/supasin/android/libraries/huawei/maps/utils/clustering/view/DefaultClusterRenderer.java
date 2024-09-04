@@ -82,6 +82,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements ClusterRen
     private final ClusterManager<T> mClusterManager;
     private final float mDensity;
     private boolean mAnimate;
+    private long mAnimationDurationMs;
     private final Executor mExecutor = Executors.newSingleThreadExecutor();
 
     private static final int[] BUCKETS = {10, 20, 50, 100, 200, 500, 1000};
@@ -135,6 +136,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements ClusterRen
     public DefaultClusterRenderer(Context context, HuaweiMap map, ClusterManager<T> clusterManager) {
         mMap = map;
         mAnimate = true;
+        mAnimationDurationMs = 300;
         mDensity = context.getResources().getDisplayMetrics().density;
         mIconGenerator = new IconGenerator(context);
         mIconGenerator.setContentView(makeSquareTextView(context));
@@ -358,6 +360,31 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements ClusterRen
     }
 
     /**
+     * Determines if the new clusters should be rendered on the map, given the old clusters. This
+     * method is primarily for optimization of performance, and the default implementation simply
+     * checks if the new clusters are equal to the old clusters, and if so, it returns false.
+     *
+     * However, there are cases where you may want to re-render the clusters even if they didn't
+     * change. For example, if you want a cluster with one item to render as a cluster above
+     * a certain zoom level and as a marker below a certain zoom level (even if the contents of the
+     * clusters themselves did not change). In this case, you could check the zoom level in an
+     * implementation of this method and if that zoom level threshold is crossed return true, else
+     * {@code return super.shouldRender(oldClusters, newClusters)}.
+     *
+     * Note that always returning true from this method could potentially have negative performance
+     * implications as clusters will be re-rendered on each pass even if they don't change.
+     *
+     * @param oldClusters The clusters from the previous iteration of the clustering algorithm
+     * @param newClusters The clusters from the current iteration of the clustering algorithm
+     * @return true if the new clusters should be rendered on the map, and false if they should not. This
+     *      method is primarily for optimization of performance, and the default implementation simply
+     *      checks if the new clusters are equal to the old clusters, and if so, it returns false.
+     */
+    protected boolean shouldRender(@NonNull Set<? extends Cluster<T>> oldClusters, @NonNull Set<? extends Cluster<T>> newClusters) {
+        return !newClusters.equals(oldClusters);
+    }
+
+    /**
      * Transforms the current view (represented by DefaultClusterRenderer.mClusters and DefaultClusterRenderer.mZoom) to a
      * new zoom level and set of clusters.
      * <p/>
@@ -406,7 +433,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements ClusterRen
 
         @SuppressLint("NewApi")
         public void run() {
-            if (clusters.equals(DefaultClusterRenderer.this.mClusters)) {
+            if (!shouldRender(immutableOf(DefaultClusterRenderer.this.mClusters), immutableOf(clusters))) {
                 mCallback.run();
                 return;
             }
@@ -549,6 +576,19 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements ClusterRen
     @Override
     public void setAnimation(boolean animate) {
         mAnimate = animate;
+    }
+
+    /**
+     * {@inheritDoc} The default duration is 300 milliseconds.
+     * @param animationDurationMs long: The length of the animation, in milliseconds. This value cannot be negative.
+     */
+    @Override
+    public void setAnimationDuration(long animationDurationMs) {
+        mAnimationDurationMs = animationDurationMs;
+    }
+
+    private Set<? extends Cluster<T>> immutableOf(Set<? extends Cluster<T>> clusters) {
+        return clusters != null ? Collections.unmodifiableSet(clusters) : Collections.emptySet();
     }
 
     private static double distanceSquared(Point a, Point b) {
@@ -1110,6 +1150,7 @@ public class DefaultClusterRenderer<T extends ClusterItem> implements ClusterRen
         public void perform() {
             ValueAnimator valueAnimator = ValueAnimator.ofFloat(0.0f, 1.0f);
             valueAnimator.setInterpolator(ANIMATION_INTERP);
+            valueAnimator.setDuration(mAnimationDurationMs);
             valueAnimator.addUpdateListener(this);
             valueAnimator.addListener(this);
             valueAnimator.start();

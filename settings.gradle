@@ -15,5 +15,10 @@
  * limitations under the License.
  */
 
-include 'library'
 include 'demo'
+<<<<<<< HEAD
+=======
+include 'library'
+include 'library-v3'
+include 'lint-checks'
+>>>>>>> v2.4.1
