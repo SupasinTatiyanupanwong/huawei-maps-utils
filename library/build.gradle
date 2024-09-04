@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 Supasin Tatiyanupanwong
+ * Copyright 2020, 2024 Supasin Tatiyanupanwong
  * Copyright 2020 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,53 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id 'kotlin-android'
-}
 
 apply plugin: 'com.android.library'
 
 android {
-<<<<<<< HEAD
-    dexOptions {
-        javaMaxHeapSize "2g"
-    }
-    compileSdkVersion 29
+    compileSdk 33
+
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 29
+        minSdk 19
+        targetSdk 33
     }
     resourcePrefix 'hmu_'
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-=======
-    compileSdkVersion 33
-
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 33
-        versionCode 1
-        versionName "1.0"
-        consumerProguardFiles 'consumer-rules.pro'
-        // This enables us to tell when we're running unit tests on Travis (#573)
-        buildConfigField("String", "TRAVIS", "\"" + System.getenv('TRAVIS') + "\"")
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    resourcePrefix 'amu_'
-    // This enables long timeouts required on slow environments, e.g. Travis
-    adbOptions {
-        timeOutInMs 10 * 60 * 1000  // 10 minutes
-        installOptions "-d", "-t"
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
->>>>>>> v2.4.1
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     testOptions {
         animationsDisabled true
@@ -69,26 +36,17 @@ android {
             returnDefaultValues = true
         }
     }
-    namespace 'com.google.maps.android'
+    namespace 'dev.supasintatiyanupanwong.libraries.android.huawei.maps.utils'
 }
 
 dependencies {
-<<<<<<< HEAD
-    implementation 'com.huawei.hms:maps:5.0.0.300'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    testImplementation 'junit:junit:4.13'
-    testImplementation 'org.robolectric:robolectric:4.3.1'
-=======
-    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    api 'com.huawei.hms:maps:5.0.0.300'
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    lintPublish project(':lint-checks')
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.robolectric:robolectric:4.7.3'
->>>>>>> v2.4.1
     testImplementation 'net.sf.kxml:kxml2:2.3.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
 task instrumentTest(dependsOn: connectedCheck)
 
-apply from: 'publish.gradle'
+//apply from: 'publish.gradle'
