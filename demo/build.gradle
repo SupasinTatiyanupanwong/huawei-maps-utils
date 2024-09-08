@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2020 Supasin Tatiyanupanwong
  * Copyright 2020 Google Inc.
  *
@@ -30,9 +30,11 @@ buildscript {
 apply plugin: 'com.android.application'
 
 android {
+    namespace 'dev.supasintatiyanupanwong.samples.android.huawei.maps.utils'
+
     compileSdkVersion 29
     defaultConfig {
-        applicationId 'me.tatiyanupanwong.supasin.android.samples.huawei.maps.utils'
+        applicationId 'dev.supasintatiyanupanwong.samples.android.huawei.maps.utils'
         minSdkVersion 19
         targetSdkVersion 29
     }
