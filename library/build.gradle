@@ -16,6 +16,7 @@
  */
 
 apply plugin: 'com.android.library'
+apply plugin: 'com.vanniktech.maven.publish'
 
 android {
     compileSdk 33
@@ -49,4 +50,7 @@ dependencies {
 
 task instrumentTest(dependsOn: connectedCheck)
 
-//apply from: 'publish.gradle'
+tasks.withType(Javadoc) {
+    title = POM_NAME + " " + VERSION_NAME + " API"
+    options.addBooleanOption 'Xdoclint:none', true
+}

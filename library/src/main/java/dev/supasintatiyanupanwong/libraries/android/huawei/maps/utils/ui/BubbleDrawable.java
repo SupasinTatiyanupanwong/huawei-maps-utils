@@ -26,9 +26,9 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
-import dev.supasintatiyanupanwong.libraries.android.huawei.maps.utils.R;
-
 import androidx.core.content.ContextCompat;
+
+import dev.supasintatiyanupanwong.libraries.android.huawei.maps.utils.R;
 
 /**
  * Draws a bubble with a shadow, filled with any color.

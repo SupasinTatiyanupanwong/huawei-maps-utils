@@ -47,7 +47,12 @@ import java.util.Random;
 /**
  * Demonstrates heavy customisation of the look of rendered clusters.
  */
-public class CustomMarkerClusteringDemoActivity extends BaseDemoActivity implements ClusterManager.OnClusterClickListener<Person>, ClusterManager.OnClusterInfoWindowClickListener<Person>, ClusterManager.OnClusterItemClickListener<Person>, ClusterManager.OnClusterItemInfoWindowClickListener<Person> {
+public class CustomMarkerClusteringDemoActivity extends BaseDemoActivity implements
+    ClusterManager.OnClusterClickListener<Person>,
+    ClusterManager.OnClusterInfoWindowClickListener<Person>,
+    ClusterManager.OnClusterItemClickListener<Person>,
+    ClusterManager.OnClusterItemInfoWindowClickListener<Person> {
+
     private ClusterManager<Person> mClusterManager;
     private Random mRandom = new Random(1984);
 
