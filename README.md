@@ -1,7 +1,7 @@
 # HUAWEI Map Kit Utility Library (Unofficial)
 
-[![Download](https://api.bintray.com/packages/supasintatiyanupanwong/android.libraries.huawei.maps/maps-utils/images/download.svg)](https://bintray.com/supasintatiyanupanwong/android.libraries.huawei.maps/maps-utils/_latestVersion)
-[![javadoc](https://javadoc.io/badge2/me.tatiyanupanwong.supasin.android.libraries.huawei.maps/maps-utils/javadoc.svg)](https://javadoc.io/doc/me.tatiyanupanwong.supasin.android.libraries.huawei.maps/maps-utils)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/dev.supasintatiyanupanwong.libraries.android.huawei.maps/maps-utils/badge.svg)](https://central.sonatype.com/artifact/dev.supasintatiyanupanwong.libraries.android.huawei.maps/maps-utils)
+[![javadoc](https://javadoc.io/badge2/dev.supasintatiyanupanwong.libraries.android.huawei.maps/maps-utils/javadoc.svg)](https://javadoc.io/doc/dev.supasintatiyanupanwong.libraries.android.huawei.maps/maps-utils)
 [![license](https://img.shields.io/github/license/SupasinTatiyanupanwong/huawei-maps-utils.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 <table>
@@ -24,7 +24,7 @@ Alpha Release
 </tr>
 <tr>
 <td align="center">
-December 8, 2020
+September 9, 2024
 </td>
 <td align="center">
 -
@@ -36,7 +36,7 @@ December 8, 2020
 -
 </td>
 <td align="center">
-<a href="RELEASE_NOTES.md#version-100-alpha02---december-8-2020">1.0.0-alpha02</a>
+<a href="RELEASE_NOTES.md#version-100-alpha03---september-9-2024">1.0.0-alpha03</a>
 </td>
 </tr>
 </table>
@@ -63,7 +63,7 @@ Add the dependencies for the artifacts you need in the `build.gradle` file for y
 
 ```groovy
 dependencies {
-    implementation 'me.tatiyanupanwong.supasin.android.libraries.huawei.maps:maps-utils:1.0.0-alpha02'
+    implementation 'dev.supasintatiyanupanwong.libraries.android.huawei.maps:maps-utils:1.0.0-alpha03'
 }  
 ```
 
